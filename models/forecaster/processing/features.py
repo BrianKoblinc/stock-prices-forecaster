@@ -1,6 +1,12 @@
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
+from forecaster.config.core import FITTED_SCALERS_DIR
+from forecaster import __version__ as _version
+
+import typing as t
+import joblib
+
 class Transform():
   def __init__(self, data, test_size, X_days):
     self.data = data
@@ -61,3 +67,37 @@ class Transform():
     self._split_X_y()
 
     return self.X_train, self.y_train, self.X_test, self.y_test, self.scaler
+  
+def save_scalers(*, scalers_to_persist: dict) -> None:
+    """Persist the scalers.
+    Saves the versioned scalers, and overwrites any previous
+    saved scalers. This ensures that when the package is
+    published, there is only one fitted scaler that can be
+    called, and we know exactly how it was built.
+    """
+
+    # Prepare versioned save file name
+    save_file_name = f"min_max_scaler{_version}.pkl"
+    save_path = FITTED_SCALERS_DIR / save_file_name
+
+    remove_old_scalers(files_to_keep=[save_file_name])
+    joblib.dump(scalers_to_persist, save_path)
+
+def load_scalers(*, file_name: str) -> dict:
+    """Load a persisted pipeline."""
+
+    file_path = FITTED_SCALERS_DIR / file_name
+    trained_model = joblib.load(filename=file_path)
+    return trained_model
+
+def remove_old_scalers(*, files_to_keep: t.List[str]) -> None:
+    """
+    Remove old model pipelines.
+    This is to ensure there is a simple one-to-one
+    mapping between the package version and the model
+    version to be imported and used by other applications.
+    """
+    do_not_delete = files_to_keep + ["__init__.py"]
+    for scalers_file in FITTED_SCALERS_DIR.iterdir():
+        if scalers_file.name not in do_not_delete:
+            scalers_file.unlink()
