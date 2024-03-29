@@ -7,6 +7,7 @@ def run_training() -> None:
     """Train the model."""
 
     # read training data
+    print("a")
     extract = Extract(ticker_list, years_bf=12)
     stocks_hist = extract.run()
 

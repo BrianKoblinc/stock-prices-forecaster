@@ -3,6 +3,10 @@ from typing import Optional
 from datetime import datetime, timedelta
 import pandas as pd
 import yfinance as yf
+
+import sys
+sys.path.append('/Users/bkoblinc/Desktop/Otros proyectos/stock-prices/stock-prices-forecaster/models')
+
 from forecaster.config.core import DATASET_DIR
 
 class Extract():
@@ -18,7 +22,7 @@ class Extract():
         self.stocks_data = [i[:-26] for i in files]
 
         for i in list(set(self.stocks_data) & set(self.ticker_list)):
-            date1 = files[self.stocks_data.index(i)][-14:-4]
+            date1 = files[self.stocks_data. index(i)][-14:-4]
             start_date_file = datetime(int(date1[:4]), int(date1[5:7]), int(date1[8:10]))
             date2 = files[self.stocks_data.index(i)][-25:-15]
             end_date_file = datetime(int(date2[:4]), int(date2[5:7]), int(date2[8:10]))

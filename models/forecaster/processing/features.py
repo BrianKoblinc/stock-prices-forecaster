@@ -2,10 +2,13 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
 from forecaster.config.core import FITTED_SCALERS_DIR
-from forecaster import __version__ as _version
+#from forecaster import __version__ as _version
 
 import typing as t
 import joblib
+
+with open('/Users/bkoblinc/Desktop/Otros proyectos/stock-prices/stock-prices-forecaster/models/forecaster/VERSION', 'r') as archivo:
+    _version = archivo.read().strip() 
 
 class Transform():
   def __init__(self, data, test_size, X_days):
