@@ -1,0 +1,18 @@
+include *.txt
+include *.md
+include *.pkl
+recursive-include ./forecaster/*
+
+include forecaster/datasets/*.csv
+include forecaster/trained_models/*.pkl
+include forecaster/fitted_scalers/*.pkl
+include forecaster/VERSION
+include forecaster/config.yml
+
+include ./requirements/requirements.txt
+include ./requirements/test_requirements.txt
+exclude *.log
+exclude *.cfg
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

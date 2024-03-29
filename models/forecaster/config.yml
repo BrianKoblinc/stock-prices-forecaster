@@ -1,0 +1,12 @@
+# Package Overview
+package_name: forecaster
+
+pipeline_name: forecaster
+pipeline_save_file: forecaster_output_v
+
+# set train/test split
+test_size: 0.05
+X_days: 60
+
+# to set the random seed
+random_state: 0
