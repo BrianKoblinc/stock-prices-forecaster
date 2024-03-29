@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
+<<<<<<< HEAD
 from forecaster.config.core import FITTED_SCALERS_DIR
 #from forecaster import __version__ as _version
 
@@ -10,6 +11,8 @@ import joblib
 with open('/Users/bkoblinc/Desktop/Otros proyectos/stock-prices/stock-prices-forecaster/models/forecaster/VERSION', 'r') as archivo:
     _version = archivo.read().strip() 
 
+=======
+>>>>>>> ee7abfd (feat: data transformation)
 class Transform():
   def __init__(self, data, test_size, X_days):
     self.data = data
@@ -69,6 +72,7 @@ class Transform():
     self._scaler()
     self._split_X_y()
 
+<<<<<<< HEAD
     return self.X_train, self.y_train, self.X_test, self.y_test, self.scaler
   
 def save_scalers(*, scalers_to_persist: dict) -> None:
@@ -104,3 +108,6 @@ def remove_old_scalers(*, files_to_keep: t.List[str]) -> None:
     for scalers_file in FITTED_SCALERS_DIR.iterdir():
         if scalers_file.name not in do_not_delete:
             scalers_file.unlink()
+=======
+    return self.X_train, self.y_train, self.X_test, self.y_test, self.scaler
+>>>>>>> ee7abfd (feat: data transformation)
